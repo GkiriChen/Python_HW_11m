@@ -20,7 +20,13 @@ class Name(Field):
 class Phone(Field):
     @Field.value.setter
     def value(self, value):
-        pass
+        if len(value) != 12:
+            raise ValueError("Phone must contains 12 symbols.")
+        if not value.startswith('380'):
+            raise ValueError("Phone must starts from '380'.")
+        if not value.isnumeric():
+            raise ValueError('Wrong phones.')
+        self._value = value
 
 class Birthday(Field):
     @Field.value.setter
